@@ -20,12 +20,13 @@ public class Game {
 	private IMove player1;
 	private IMove player2;
 
-	public Game(int boardSize, IMove player1, IMove player2) {
-		this.board = new Board(boardSize);
+	public Game(IMove player1, IMove player2, int boardSize, int symbolsToWin) {
+		this.board = new Board(boardSize, symbolsToWin);
 		this.player1 = player1;
 		this.player2 = player2;
 	}
 
+	
 	public void playGame() {
 		for (int round = 0;;) {
 			System.out.println(board);
@@ -36,10 +37,10 @@ public class Game {
 				System.out.println(board);
 				return;
 			}
-			round++;
-			if (round == board.getBoardSize() * board.getBoardSize()) {
+			if (round == board.getBoardSize() * board.getBoardSize() - 1) {
 				break;
 			}
+			round++;
 			
 			System.out.println(board);
 			Move move2 = player2.makeMove(board, BoardSymbol.CIRCLE);
@@ -49,15 +50,21 @@ public class Game {
 				System.out.println(board);
 				return;
 			}
-			round++;
-			if (round == board.getBoardSize() * board.getBoardSize()) {
+			if (round == board.getBoardSize() * board.getBoardSize() - 1) {
 				break;
 			}
+			round++;
 		}
 		System.out.println("It`s a draw!");
+		System.out.println(board);
 	}
 
-	//todo doma + vytvořit novou třídu inteligentní hráč, který bude implementovat IMove
+	/**
+	 * 
+	 * @param board
+	 * @param move
+	 * @return 
+	 */
 	private boolean isWinner(Board board, Move move) {
 
 		if (this.checkColumns(board, move)) {
@@ -76,26 +83,33 @@ public class Game {
 	}
 
 	private boolean checkColumns(Board board, Move move) {
-		for (int i = 0; i < board.getSymbolsToWin(); i++) {
+		int count = 0;
+		for (int i = 0; i < board.getBoardSize(); i++) {
 			if (board.getSymbolAtPosition(move.getPositionX(), i) != move.getSymbol()) {
-				break;
+				count = 0;
+				continue;
 			}
-			if (i == board.getSymbolsToWin() - 1) {
+			if (count == board.getSymbolsToWin() - 1) {
 				return true;
 			}
+			count++;
 		}
+		System.out.println();
 		
 		return false;
 	}
 
 	private boolean checkRows(Board board, Move move) {
-		for (int i = 0; i < board.getSymbolsToWin(); i++) {
+		int count = 0;
+		for (int i = 0; i < board.getBoardSize(); i++) {
 			if (board.getSymbolAtPosition(i, move.getPositionY()) != move.getSymbol()) {
-				break;
+				count = 0;
+				continue;
 			}
-			if (i == board.getSymbolsToWin() - 1) {
+			if (count == board.getSymbolsToWin() - 1) {
 				return true;
 			}
+			count++;
 		}
 		
 		return false;

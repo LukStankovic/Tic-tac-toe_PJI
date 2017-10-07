@@ -7,35 +7,26 @@ package game.player;
 
 import game.board.Board;
 import game.board.BoardSymbol;
-import java.util.Scanner;
 
 /**
  *
  * @author lukstankovic
  */
-public class Human implements IMove {
-
+public class IntelligentPlayer implements IMove {
 	private final String name;
 
-	public Human(String name) {
+	public IntelligentPlayer(String name) {
 		this.name = name;
 	}
 	
 	@Override
 	public Move makeMove(Board board, BoardSymbol yourSymbol) {
-		int posX, posY;
-		Scanner sc = new Scanner(System.in);
-		do {
-			System.out.println("Enter the cooardinates of your move (" + yourSymbol + ")");
-			posX = sc.nextInt();
-			posY = sc.nextInt();
-		} while (board.getSymbolAtPosition(posX, posY) != null);
-		return new Move(posX, posY, yourSymbol);
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-
+	
 	@Override
 	public String getName() {
 		return name;
 	}
-	
+
 }

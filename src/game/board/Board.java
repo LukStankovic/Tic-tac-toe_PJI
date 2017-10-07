@@ -13,12 +13,18 @@ import game.player.Move;
  */
 public class Board {
 	private final int boardSize;
-	private final int symbolsToWin = 3;
+	private final int symbolsToWin;
 			
 	private BoardSymbol[][] board;
 	
-	public Board(int boardSize) {
+	/**
+	 * 
+	 * @param boardSize
+	 * @param symbolsToWin 
+	 */
+	public Board(int boardSize, int symbolsToWin) {
 		this.boardSize = boardSize;
+		this.symbolsToWin = symbolsToWin;
 		board = new BoardSymbol[boardSize][boardSize];
 	}
 

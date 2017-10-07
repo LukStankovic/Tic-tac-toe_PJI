@@ -14,7 +14,12 @@ import java.util.Random;
  * @author lukstankovic
  */
 public class StupidPlayer implements IMove {
+	private final String name;
 
+	public StupidPlayer(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public Move makeMove(Board board, BoardSymbol yourSymbol) {
 		int posX, posY;
@@ -28,7 +33,7 @@ public class StupidPlayer implements IMove {
 
 	@Override
 	public String getName() {
-		return "Stupid player";
+		return name;
 	}
 	
 }
