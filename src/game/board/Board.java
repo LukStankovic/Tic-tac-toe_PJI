@@ -13,6 +13,8 @@ import game.player.Move;
  */
 public class Board {
 	private final int boardSize;
+	private final int symbolsToWin = 3;
+			
 	private BoardSymbol[][] board;
 	
 	public Board(int boardSize) {
@@ -22,6 +24,10 @@ public class Board {
 
 	public int getBoardSize() {
 		return boardSize;
+	}
+
+	public int getSymbolsToWin() {
+		return symbolsToWin;
 	}
 
 	public BoardSymbol getSymbolAtPosition(int x, int y) {
@@ -43,7 +49,7 @@ public class Board {
 			for (int j = 0; j < boardSize; j++) {
 				if (board[j][i] == BoardSymbol.CIRCLE) {
 					sb.append('O');
-				} else if (board[i][j] == BoardSymbol.CROSS) {
+				} else if (board[j][i] == BoardSymbol.CROSS) {
 					sb.append('X');
 				} else {
 					sb.append('.');
